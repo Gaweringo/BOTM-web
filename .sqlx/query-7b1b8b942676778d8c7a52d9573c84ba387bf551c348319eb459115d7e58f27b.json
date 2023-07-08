@@ -1,0 +1,17 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "INSERT INTO users (spotify_id, active, refresh_token, access_token, expiry_timestamp) VALUES ($1, true, $2, $3, $4)\n            ON CONFLICT (spotify_id) DO UPDATE SET refresh_token = $2",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Text",
+        "Text",
+        "Timestamptz"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "7b1b8b942676778d8c7a52d9573c84ba387bf551c348319eb459115d7e58f27b"
+}

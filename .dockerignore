@@ -1,0 +1,8 @@
+.env
+target/
+tests/
+Dockerfile
+scripts/
+justfile
+state.md
+render.yaml

@@ -1,0 +1,14 @@
+application:
+  host: "0.0.0.0"
+database:
+  host: "postgres"
+  require_ssl: true
+spotify:
+  redirect_uri: "https://botm.gaweringo.yachts/redirect"
+cron_ips:
+  - "195.201.26.157"
+  - "116.203.134.67"
+  - "116.203.129.16"
+  - "23.88.105.37"
+  - "128.140.8.200"
+  - "77.119.115.187"

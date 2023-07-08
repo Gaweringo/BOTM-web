@@ -1,0 +1,97 @@
+.botm {
+  font-family: Sans;
+  color: floralwhite;
+  font-size: 6em;
+  text-align: center;
+  margin: 0;
+}
+
+.subtitle {
+  margin-top: 0;
+  color: mediumaquamarine;
+  font-family: Sans;
+  text-align: center;
+}
+
+.spotify-style {
+  background-color: green;
+}
+
+.spotify-style:hover {
+  background-color: darkgreen;
+}
+
+.btn {
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  border-radius: 500px;
+  margin: auto;
+}
+
+.btn a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.btn svg {
+  fill: #ffffff;
+  vertical-align: -0.125em;
+}
+
+.disconnect-style {
+  background-color: #991b1b;
+}
+
+.disconnect-style:hover {
+  background-color: #7f1d1d;
+}
+
+.logout-style {
+  background-color: #0e7490;
+}
+
+.logout-style:hover {
+  background-color: #155e75;
+}
+
+.username {
+  text-align: center;
+}
+
+.icon, .text {
+  vertical-align: center;
+  display: inline-block;
+}
+
+.text {
+  margin: 0 5px 0 5px;
+}
+
+body {
+  font-family: Sans;
+  color: floralwhite;
+  margin: 0;
+  background-color: darkslategray;
+}
+
+p {
+  text-align: center;
+}
+
+.info-section {
+  background-color: #f5a65b;
+}
+
+.info-section p {
+  margin: 0; 
+  padding: 10px; 
+  color: black;
+}
+
+.info-section h4 {
+  text-align: center;
+  margin: 0; 
+  padding: 10px; 
+  color: black;
+}

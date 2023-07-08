@@ -1,0 +1,13 @@
+application:
+  port: 8080
+database:
+  host: "postgres"
+  port: 5432
+  username: "postgres"
+  password: "password"
+  database_name: "botm"
+cron_ips:
+  - "195.201.26.157"
+  - "116.203.134.67"
+  - "23.88.105.37"
+  - "128.140.8.200"

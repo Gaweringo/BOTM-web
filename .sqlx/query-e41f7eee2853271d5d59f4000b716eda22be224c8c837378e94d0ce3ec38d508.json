@@ -1,0 +1,26 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "SELECT spotify_id, refresh_token FROM users WHERE active = true",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "spotify_id",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 1,
+        "name": "refresh_token",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": []
+    },
+    "nullable": [
+      false,
+      false
+    ]
+  },
+  "hash": "e41f7eee2853271d5d59f4000b716eda22be224c8c837378e94d0ce3ec38d508"
+}

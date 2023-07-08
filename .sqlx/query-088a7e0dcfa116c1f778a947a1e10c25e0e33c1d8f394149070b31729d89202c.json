@@ -1,0 +1,16 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "UPDATE users SET access_token = $1, expiry_timestamp = $2 WHERE spotify_id = $3",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Timestamptz",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "088a7e0dcfa116c1f778a947a1e10c25e0e33c1d8f394149070b31729d89202c"
+}

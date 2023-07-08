@@ -1,0 +1,11 @@
+application:
+  host: "127.0.0.1"
+  base_url: "http://127.0.0.1"
+database:
+  host: "localhost"
+  require_ssl: false
+spotify:
+  redirect_uri: "http://127.0.0.1:8080/redirect"
+cookie_key: "local-non-secure-cookie-key-only-for-testing-which-needs-to-be-at-least-64-bits-long"
+cron_ips:
+  - "127.0.0.1"

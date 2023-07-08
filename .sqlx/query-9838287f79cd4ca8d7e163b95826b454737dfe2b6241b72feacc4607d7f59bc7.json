@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "UPDATE users SET refresh_token = $1 WHERE spotify_id = $2",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "9838287f79cd4ca8d7e163b95826b454737dfe2b6241b72feacc4607d7f59bc7"
+}
