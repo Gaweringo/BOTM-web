@@ -182,14 +182,20 @@ impl<'a> BotmGenerator<'a> {
 
         // Create playlist
         let mut now = chrono::Local::now();
-        now = now.with_day(1).unwrap_or(now);
-        if now.month() == 1 {
-            now = now.with_year(now.year() - 1).unwrap_or(now);
-            now = now.with_month(12).unwrap_or(now);
-        } else {
-            now = now.with_month(now.month() - 1).unwrap_or(now);
+        // If the current time is before the 15 of the month (~half of month) the playlist
+        // has more from the month before and should therefor be named for that month.
+        // This counteracts any difference in time there would be between the time cron-job.org
+        // and fly.io use. So that if 00:01 on 1st from cron-job.org is still last month on fly.io
+        // we still get the playlist named for the right month.
+        if now.day() < 15 {
+            now = now.with_day(1).unwrap_or(now);
+            if now.month() == 1 {
+                now = now.with_year(now.year() - 1).unwrap_or(now);
+                now = now.with_month(12).unwrap_or(now);
+            } else {
+                now = now.with_month(now.month() - 1).unwrap_or(now);
+            }
         }
-
         let playlist_name = now.format("%Y-%m (%b) BOTM").to_string();
         let description = now.format("Bangers of the month for %B %Y").to_string();
         let description = format!(
