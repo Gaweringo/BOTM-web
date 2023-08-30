@@ -31,8 +31,9 @@ impl Botm {
     /// Set up all the configuration for the BOTM web server.
     /// Botm can then be run with `run_until_stopped().await`.
     ///
-    /// ```
-    /// let botm = Botm::build(configuration).unwrap();
+    /// ```ignore
+    /// let configuration = Configuration::new().expect("Failed to load configuration");
+    /// let botm = Botm::build(configuration).await.unwrap();
     /// botm.run_until_stopped().await?;
     /// ```
     pub async fn build(configuration: Configuration) -> anyhow::Result<Self> {
