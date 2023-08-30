@@ -204,6 +204,8 @@ impl<'a> BotmGenerator<'a> {
             chrono::Local::now().format("%F")
         );
 
+        debug!("Generating playlist \"{playlist_name}\" with description \"{description}\"");
+
         let mut json_body = HashMap::new();
         json_body.insert("name", playlist_name);
         json_body.insert("description", description);
