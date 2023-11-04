@@ -3,16 +3,16 @@ set -x
 set -eo pipefail
 
 if ! [ -x "$(command -v psql)" ]; then
-	echo >&2 "Error: psql is not installed."
-	exit 1
+        echo >&2 "Error: psql is not installed."
+        exit 1
 fi
 
 if ! [ -x "$(command -v sqlx)" ]; then
-	echo >&2 "Error: sqlx is not installed."
-	echo >&2 "Use:"
-	echo >&2 "    cargo install --version=0.6.0 sqlx-cli --no-default-features --features postgres"
-	echo >&2 "to install it."
-	exit 1
+        echo >&2 "Error: sqlx is not installed."
+        echo >&2 "Use:"
+        echo >&2 "    cargo install --version=0.6.0 sqlx-cli --no-default-features --features postgres"
+        echo >&2 "to install it."
+        exit 1
 fi
 
 DB_USER=${POSTGRES_USER:=postgres}
@@ -21,22 +21,22 @@ DB_NAME="${POSTGRES_DB:=botm}"
 DB_PORT="${POSTGRES_PORT:=5432}"
 
 if [[ -z "${SKIP_DOCKER}" ]]; then
-	docker run \
-		-e POSTGRES_USER=${DB_USER} \
-		-e POSTGRES_PASSWORD=${DB_PASSWORD} \
-		-e POSTGRES_DB=${DB_NAME} \
-		--name botm-postgres \
-		--rm \
-		--network=prod \
-		-p "${DB_PORT}":5432 \
-		-d postgres \
-		postgres -N 1000
+        docker run \
+                -e POSTGRES_USER=${DB_USER} \
+                -e POSTGRES_PASSWORD=${DB_PASSWORD} \
+                -e POSTGRES_DB=${DB_NAME} \
+                --name botm-postgres \
+                --rm \
+                --network=prod \
+                -p "${DB_PORT}":5432 \
+                -d postgres \
+                postgres -N 1000
 fi
 
 # Keep pinging Postgres until it's ready to accept commands
 until PGPASSWORD="${DB_PASSWORD}" psql -h "localhost" -U "${DB_USER}" -p "${DB_PORT}" -d "postgres" -c '\q'; do
-	echo >&2 "Postgres is still unavailable - sleeping"
-	sleep 1
+        echo >&2 "Postgres is still unavailable - sleeping"
+        sleep 1
 done
 
 echo >&2 "Postgres is up and running on port ${DB_PORT}!"

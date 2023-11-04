@@ -1,5 +1,4 @@
 .botm {
-  font-family: Sans;
   color: floralwhite;
   font-size: 6em;
   text-align: center;
@@ -9,7 +8,6 @@
 .subtitle {
   margin-top: 0;
   color: mediumaquamarine;
-  font-family: Sans;
   text-align: center;
 }
 
@@ -69,7 +67,7 @@
 }
 
 body {
-  font-family: Sans;
+  font-family: Sans, sans-serif;
   color: floralwhite;
   margin: 0;
   background-color: darkslategray;
