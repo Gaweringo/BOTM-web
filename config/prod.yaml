@@ -4,7 +4,7 @@ database:
   host: "postgres"
   require_ssl: true
 spotify:
-  redirect_uri: "https://botm.gaweringo.yachts/redirect"
+  redirect_uri: "https://botm.gaweringo.xyz/redirect"
 cron_ips:
   - "195.201.26.157"
   - "116.203.134.67"
