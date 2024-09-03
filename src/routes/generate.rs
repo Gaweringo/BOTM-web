@@ -1,4 +1,7 @@
-use std::{collections::HashMap, env};
+use std::{
+    collections::{HashMap, HashSet},
+    env,
+};
 
 use actix_web::{
     http::header::{self, HeaderMap},
@@ -74,12 +77,25 @@ pub async fn generate(
     tracing::info!("Found {} users", users.len());
 
     let botm_generator = BotmGenerator::new(oauth.as_ref(), pg_pool.as_ref());
+    let mut error_users = HashSet::new();
     for user in users.iter() {
         if let Err(err) = botm_generator.generate_for(user).await {
+            error_users.insert(&user.spotify_id);
+            tracing::error!("Failed to generate BOTM for {}", &user.spotify_id);
             tracing::error!("{}", err);
-            return HttpResponse::InternalServerError().finish();
+            continue;
         }
     }
+
+    if error_users.len() != 0 {
+        tracing::error!(
+            "Failed to generate BOTM for {} of {} users",
+            error_users.len(),
+            users.len()
+        );
+        return HttpResponse::InternalServerError().finish();
+    }
+
     HttpResponse::Ok().body(format!("Generated for {} users", users.len()))
 }
 
