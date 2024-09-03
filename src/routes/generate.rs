@@ -13,6 +13,11 @@ use sqlx::PgPool;
 use tracing::{debug, log::trace};
 use url::Url;
 
+#[derive(serde::Deserialize, Debug)]
+pub struct GenerateParams {
+    spotify_id: Option<String>,
+}
+
 #[derive(Debug)]
 struct UserData {
     spotify_id: String,
@@ -24,6 +29,7 @@ pub async fn generate(
     pg_pool: web::Data<PgPool>,
     oauth: web::Data<oauth2::basic::BasicClient>,
     request: HttpRequest,
+    params: web::Query<GenerateParams>,
 ) -> HttpResponse {
     // Protected endpoint with basic auth
     let Ok(credentials) = basic_authentication(request.headers()) else {
@@ -45,12 +51,22 @@ pub async fn generate(
             .finish();
     }
 
-    let Ok(users) = sqlx::query_as!(
-        UserData,
-        r#"SELECT spotify_id, refresh_token FROM users WHERE active = true"#
-    )
-    .fetch_all(pg_pool.as_ref())
-    .await else {
+    if let Some(spotify_id) = &params.spotify_id {
+        tracing::info!("Generating for specific user: {}", spotify_id);
+    }
+
+    let Ok(users) = (match &params.spotify_id {
+        Some(spotify_id) => sqlx::query_as!(
+            UserData,
+            r#"SELECT spotify_id, refresh_token FROM users WHERE spotify_id = $1 AND active = true"#,
+            spotify_id
+        ).fetch_all(pg_pool.as_ref()).await,
+        None => sqlx::query_as!(
+            UserData,
+            r#"SELECT spotify_id, refresh_token FROM users WHERE active = true"#
+        ).fetch_all(pg_pool.as_ref()).await,
+    })
+    else {
         tracing::error!("Failed to get users from database");
         return HttpResponse::InternalServerError().finish();
     };
