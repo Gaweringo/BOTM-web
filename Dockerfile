@@ -17,7 +17,7 @@ COPY . .
 ENV SQLX_OFFLINE true
 RUN cargo build --release --bin botm_web
 
-FROM debian:bullseye-slim AS runtime
+FROM debian:12-slim AS runtime
 WORKDIR /app
 RUN apt-get update -y \
   && apt-get install -y --no-install-recommends openssl ca-certificates \
